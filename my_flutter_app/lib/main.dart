@@ -1,103 +1,78 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 
-import 'bcard.dart';
-import 'pred.dart';
-import 'resume.dart';
+  import 'bcard.dart';
+  import 'pred.dart';
+  import 'resume.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Call Me Maybe',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Call Me Maybe'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void main() {
+    runApp(const MyApp());
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return DefaultTabController(length: 3, child: Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        bottom: const TabBar(
-          tabs: [
-            Tab(icon: Icon(Icons.directions_car)),
-            Tab(icon: Icon(Icons.directions_transit)),
-            Tab(icon: Icon(Icons.directions_bike)),
-          ],
+  class MyApp extends StatelessWidget {
+    const MyApp({super.key});
+
+    // This widget is the root of your application.
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp(
+        title: 'Call Me Maybe',
+        theme: ThemeData(
+          colorScheme: ColorScheme.light(
+            primary: Colors.white70,
+            secondary: Colors.blueGrey,
+          ),
         ),
-      ),
-      body: TabBarView(
-        children: [
-          BCard(),
-          Resume(),
-          Prediction(),
-        ],
-      )
-    ));
+        home: const MyHomePage(title: 'Call Me Maybe'),
+      );
+    }
   }
-}
+
+  class MyHomePage extends StatelessWidget {
+    const MyHomePage({super.key, required this.title});
+
+    final String title;
+      
+    @override
+    Widget build(BuildContext context) {
+      return DefaultTabController(length: 3, child: Scaffold(
+        appBar: AppBar(
+          title: Center(child: Text(title)),
+          titleTextStyle: TextStyle(
+            color: Colors.white70,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+          backgroundColor: Colors.blueGrey,
+          bottom: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.face)),
+              Tab(icon: Icon(Icons.article)),
+              Tab(icon: Icon(Icons.question_mark)),
+            ],
+            indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(color: Colors.white, width: 5),
+              insets: EdgeInsets.symmetric(horizontal: 16), // Adjust the horizontal insets to make the indicator wider
+            ),
+            indicatorSize: TabBarIndicatorSize.tab,
+            unselectedLabelColor: Colors.white70,
+            labelColor: Colors.white,
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            BCard(),
+            Resume(),
+            Prediction(),
+          ],
+        )
+      ));
+    }
+  }
+
+  // The program should be a three-tab application and should be visually styled beyond the intentionally minimum "look and feel" shown above. The program should be responsive to different device orientations, invoke platform services, and support some stateful interaction. The application should:
+  // Display three tabs, consisting of icons, at the top area of the screen.
+  // The application should support all orientations except upside-down.
+  // The layout should be responsive enough to look good and be usable in any orientation.
+  // The content should not be hidden by notches or curved corners of the device screen.
+  // The Business Card and Predictor screens should not cause overflow or require scrolling, in any orientation.
+  // When oriented horizontally, the Resume content should expand horizontally, and still allow for vertical scrolling.
